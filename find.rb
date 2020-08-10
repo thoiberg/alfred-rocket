@@ -3,7 +3,6 @@
 # TODO: Replace icon in Workflow
 # TODO: Show Emoji as result icon is possible
 
-
 require 'json'
 
 # TODO: Make Rocket install location configurable
@@ -21,11 +20,12 @@ def find(emoji_name)
   matching_emojis = emoji_json.select{|emoji| emoji[:short_names].include?(emoji_name)}
 
   # example: [{:content=>"👋", :language=>"en", :short_names=>["wave"], :name=>"waving hand", :keywords=>["goodbye"]}]
-  # TODO: Add keywords and short names as a subtitle
   alfred_items = matching_emojis.map do |matching_emoji|
+    subtitle = matching_emoji[:short_names].append(matching_emoji[:keywords]).join(', ')
     {
       title: matching_emoji[:name],
-      arg: matching_emoji[:content]
+      subtitle: subtitle,
+      arg: matching_emoji[:content],
     }
 
   end
