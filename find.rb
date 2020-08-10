@@ -15,9 +15,9 @@ def find(emoji_name)
   emoji_file = File.read("#{ROCKET_INSTALL_LOCATION}/#{ROCKET_FILE_NAME}")
   emoji_json = JSON.parse(emoji_file, symbolize_names: true)
 
-  # TODO: check the keywords array as well
   matching_emojis = emoji_json.select do |emoji|
     matches = emoji[:short_names].grep(/.*#{emoji_name}.*/)
+    matches += (emoji[:keywords].grep(/.*#{emoji_name}.*/))
     matches.length > 0
   end
 
