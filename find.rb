@@ -15,9 +15,11 @@ def find(emoji_name)
   emoji_file = File.read("#{ROCKET_INSTALL_LOCATION}/#{ROCKET_FILE_NAME}")
   emoji_json = JSON.parse(emoji_file, symbolize_names: true)
 
-  # TODO: make it a wildcard regex search
   # TODO: check the keywords array as well
-  matching_emojis = emoji_json.select{|emoji| emoji[:short_names].include?(emoji_name)}
+  matching_emojis = emoji_json.select do |emoji|
+    matches = emoji[:short_names].grep(/.*#{emoji_name}.*/)
+    matches.length > 0
+  end
 
   # example: [{:content=>"👋", :language=>"en", :short_names=>["wave"], :name=>"waving hand", :keywords=>["goodbye"]}]
   alfred_items = matching_emojis.map do |matching_emoji|
