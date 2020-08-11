@@ -20,7 +20,7 @@ def find(emoji_name)
 
   # example: [{:content=>"👋", :language=>"en", :short_names=>["wave"], :name=>"waving hand", :keywords=>["goodbye"]}]
   alfred_items = matching_emojis.map do |matching_emoji|
-    subtitle = matching_emoji[:short_names].append(matching_emoji[:keywords]).join(', ')
+    subtitle = (matching_emoji[:short_names] + matching_emoji[:keywords]).join(', ')
     {
       title: matching_emoji[:name],
       subtitle: subtitle,
