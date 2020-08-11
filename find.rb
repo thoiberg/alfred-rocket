@@ -22,7 +22,7 @@ def find(emoji_name)
   alfred_items = matching_emojis.map do |matching_emoji|
     subtitle = (matching_emoji[:short_names] + matching_emoji[:keywords]).join(', ')
     {
-      title: matching_emoji[:name],
+      title: "#{matching_emoji[:content]} #{matching_emoji[:name]}",
       subtitle: subtitle,
       arg: matching_emoji[:content],
     }
