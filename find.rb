@@ -1,8 +1,5 @@
 #!/usr/env ruby
 
-# TODO: Replace icon in Workflow
-# TODO: Show Emoji as result icon is possible
-
 require 'json'
 
 # TODO: Make Rocket install location configurable
